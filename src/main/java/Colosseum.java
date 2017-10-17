@@ -15,7 +15,10 @@ public class Colosseum {
      * The maximum number of hit points we will allow a Pokemon to start with.
      */
     static final int MAX_HIT_POINTS = 50;
-
+    /**
+     * The maximum number of defensive we will allow a Pokemon to start with.
+     */
+    static final int MAX_DEF = 24;
     /**
      * The maximum number of rounds we will let the Pokemon battle.
      */
@@ -74,6 +77,37 @@ public class Colosseum {
      */
     public static Pokemon buildPokemon() {
         Pokemon tempPokemon = new Pokemon();
+        System.out.println("What is its name?");
+        tempPokemon.name = myScan.next();
+
+        System.out.println("Enter your defense level (1-23): ");
+        tempPokemon.defenseLevel = myScan.nextInt();
+        while (tempPokemon.defenseLevel > MAX_DEF || tempPokemon.defenseLevel <= 0) {
+            System.out.println(
+                    "Sorry. The defense level must be between 1 and 23: "
+                            + tempPokemon.defenseLevel);
+            System.out.println("Enter your defense level (1-23): ");
+            tempPokemon.defenseLevel = myScan.nextInt();
+        }
+
+        System.out.println("Enter your attack level (1-49): ");
+        tempPokemon.attackLevel = myScan.nextInt();
+        while (tempPokemon.attackLevel > MAX_HIT_POINTS || tempPokemon.attackLevel <= 0) {
+            System.out.println(
+                    "Sorry. The defense level must be between 1 and 49: "
+                            + tempPokemon.attackLevel);
+            System.out.println("Enter your attack level (1-49): ");
+            tempPokemon.attackLevel = myScan.nextInt();
+        }
+
+        System.out.println("How many hit points will it have? (1-50): ");
+        tempPokemon.hitPoints = myScan.nextInt();
+        while (tempPokemon.hitPoints > MAX_HIT_POINTS + 1 || tempPokemon.hitPoints <= 0) {
+            System.out.println(
+                    "Sorry. Hit points must be between 1 and 50: " + tempPokemon.hitPoints);
+            System.out.println("How many hit points will it have? (1-50): ");
+            tempPokemon.hitPoints = myScan.nextInt();
+        }
         return tempPokemon;
     }
 
@@ -91,7 +125,17 @@ public class Colosseum {
      * Implement this function.
      */
     public static void printWhoIsAhead() {
-        System.out.println("Implement me!");
+        int hitPA = firstPokemon.hitPoints;
+        int hitPB = secondPokemon.hitPoints;
+        System.out.println(firstPokemon.name + " has " + hitPA + " hit points");
+        System.out.println(secondPokemon.name + " has " + hitPB + " hit points");
+        if (hitPA < hitPB) {
+            System.out.println(firstPokemon.name + " is currently ahead!");
+        } else if (hitPA > hitPB) {
+            System.out.println(secondPokemon.name + " is currently ahead!");
+        } else {
+            System.out.println("It's a tie!");
+        }
     }
 
     /**
@@ -102,7 +146,15 @@ public class Colosseum {
      * Write this function.
      */
     public static void determineWinner() {
-        System.out.println("Implement me!");
+        int hitPA = firstPokemon.hitPoints;
+        int hitPB = secondPokemon.hitPoints;
+        System.out.println(firstPokemon.name + " has " + hitPA + " hit points");
+        System.out.println(secondPokemon.name + " has " + hitPB + " hit points");
+        if (hitPA < hitPB) {
+            System.out.println(firstPokemon.name + " is the winner!");
+        } else if (hitPA > hitPB) {
+            System.out.println(secondPokemon.name + " is the winner!");
+        }
     }
 
     /**
